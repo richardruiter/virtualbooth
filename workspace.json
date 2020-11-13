@@ -1,101 +1,125 @@
 {
   "version": 1,
   "projects": {
-    "virtualbooth": {
-      "root": "apps/virtualbooth",
-      "sourceRoot": "apps/virtualbooth/src",
+    "booth": {
+      "root": "apps/booth",
+      "sourceRoot": "apps/booth/src",
       "projectType": "application",
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@nrwl/web:build",
+          "builder": "@nrwl/gatsby:build",
           "options": {
-            "outputPath": "dist/apps/virtualbooth",
-            "index": "apps/virtualbooth/src/index.html",
-            "main": "apps/virtualbooth/src/main.tsx",
-            "polyfills": "apps/virtualbooth/src/polyfills.ts",
-            "tsConfig": "apps/virtualbooth/tsconfig.app.json",
-            "assets": [
-              "apps/virtualbooth/src/favicon.ico",
-              "apps/virtualbooth/src/assets"
-            ],
-            "styles": [],
-            "scripts": [],
-            "webpackConfig": "@nrwl/react/plugins/webpack"
+            "outputPath": "apps/booth/public",
+            "uglify": true,
+            "color": true,
+            "profile": false
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/gatsby:server",
+          "options": {
+            "buildTarget": "booth:build",
+            "proxyConfig": "apps/booth/proxy.conf.json"
           },
           "configurations": {
             "production": {
+              "buildTarget": "booth:build:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {}
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/booth/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "booth-e2e": {
+      "root": "apps/booth-e2e",
+      "sourceRoot": "apps/booth-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/booth-e2e/cypress.json",
+            "tsConfig": "apps/booth-e2e/tsconfig.e2e.json",
+            "devServerTarget": "booth:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "booth:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/booth-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "cms": {
+      "root": "apps/cms",
+      "sourceRoot": "apps/cms/src",
+      "projectType": "application",
+      "prefix": "cms",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/cms",
+            "main": "apps/cms/src/main.ts",
+            "tsConfig": "apps/cms/tsconfig.app.json",
+            "assets": ["apps/cms/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
               "fileReplacements": [
                 {
-                  "replace": "apps/virtualbooth/src/environments/environment.ts",
-                  "with": "apps/virtualbooth/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "replace": "apps/cms/src/environments/environment.ts",
+                  "with": "apps/cms/src/environments/environment.prod.ts"
                 }
               ]
             }
           }
         },
         "serve": {
-          "builder": "@nrwl/web:dev-server",
+          "builder": "@nrwl/node:execute",
           "options": {
-            "buildTarget": "virtualbooth:build"
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "virtualbooth:build:production"
-            }
+            "buildTarget": "cms:build"
           }
         },
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "lintFilePatterns": ["apps/virtualbooth/**/*.{ts,tsx,js,jsx}"]
+            "tsConfig": [
+              "apps/cms/tsconfig.app.json",
+              "apps/cms/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/cms/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/virtualbooth/jest.config.js",
+            "jestConfig": "apps/cms/jest.config.js",
             "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "virtualbooth-e2e": {
-      "root": "apps/virtualbooth-e2e",
-      "sourceRoot": "apps/virtualbooth-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/virtualbooth-e2e/cypress.json",
-            "tsConfig": "apps/virtualbooth-e2e/tsconfig.e2e.json",
-            "devServerTarget": "virtualbooth:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "virtualbooth:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/virtualbooth-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -118,7 +142,10 @@
         "style": "styled-components",
         "linter": "eslint"
       }
+    },
+    "@nrwl/gatsby": {
+      "application": {}
     }
   },
-  "defaultProject": "virtualbooth"
+  "defaultProject": "booth"
 }

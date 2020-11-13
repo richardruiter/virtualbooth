@@ -2,3 +2,7 @@
 
 /dist
 /coverage
+
+/apps/booth/node_modules
+/apps/booth/public
+/apps/booth/.cache

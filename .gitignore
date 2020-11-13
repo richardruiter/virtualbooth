@@ -37,3 +37,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+/apps/booth/node_modules
+/apps/booth/public
+/apps/booth/.cache

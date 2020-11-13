@@ -23,12 +23,15 @@
     }
   },
   "projects": {
-    "virtualbooth": {
+    "booth": {
       "tags": []
     },
-    "virtualbooth-e2e": {
+    "booth-e2e": {
       "tags": [],
-      "implicitDependencies": ["virtualbooth"]
+      "implicitDependencies": ["booth"]
+    },
+    "cms": {
+      "tags": []
     }
   }
 }

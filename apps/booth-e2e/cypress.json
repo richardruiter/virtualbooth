@@ -6,7 +6,7 @@
   "pluginsFile": "./src/plugins/index",
   "supportFile": "./src/support/index.ts",
   "video": true,
-  "videosFolder": "../../dist/cypress/apps/virtualbooth-e2e/videos",
-  "screenshotsFolder": "../../dist/cypress/apps/virtualbooth-e2e/screenshots",
+  "videosFolder": "../../dist/cypress/apps/booth-e2e/videos",
+  "screenshotsFolder": "../../dist/cypress/apps/booth-e2e/screenshots",
   "chromeWebSecurity": false
 }

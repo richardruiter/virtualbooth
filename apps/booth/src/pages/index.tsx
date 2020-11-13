@@ -1,11 +1,14 @@
 import React from 'react';
-
 import styled from 'styled-components';
 
 import { ReactComponent as Logo } from './logo.svg';
 import star from './star.svg';
 
 const StyledApp = styled.div`
+  /*
+ * Remove template code below
+ */
+
   font-family: sans-serif;
   min-width: 300px;
   max-width: 600px;
@@ -134,17 +137,17 @@ const StyledApp = styled.div`
   }
 `;
 
-export const App = () => {
+export const Index = () => {
   /*
    * Replace the elements below with your own.
    *
-   * Note: The corresponding styles are in the ./app.styled-components file.
+   * Note: The corresponding styles are in the ./${fileName}.${style} file.
    */
   return (
     <StyledApp>
       <header className="flex">
         <Logo width="75" height="75" />
-        <h1>Welcome to virtualbooth!</h1>
+        <h1>Welcome to booth!</h1>
       </header>
       <main>
         <h2>Resources &amp; Tools</h2>
@@ -190,24 +193,13 @@ export const App = () => {
             </a>
           </li>
           <li className="col-span-2">
-            <a className="resource flex" href="https://nx.app/">
-              <svg
-                width="36"
+            <a className="resource flex" href="https://connect.nrwl.io/">
+              <img
                 height="36"
-                viewBox="0 0 120 120"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M120 15V30C103.44 30 90 43.44 90 60C90 76.56 76.56 90 60 90C43.44 90 30 103.44 30 120H15C6.72 120 0 113.28 0 105V15C0 6.72 6.72 0 15 0H105C113.28 0 120 6.72 120 15Z"
-                  fill="#0E2039"
-                />
-                <path
-                  d="M120 30V105C120 113.28 113.28 120 105 120H30C30 103.44 43.44 90 60 90C76.56 90 90 76.56 90 60C90 43.44 103.44 30 120 30Z"
-                  fill="white"
-                />
-              </svg>
-              <span className="gutter-left">Nx Cloud</span>
+                alt="Nrwl Connect"
+                src="https://connect.nrwl.io/assets/img/CONNECT_ColorIcon.png"
+              />
+              <span className="gutter-left">Nrwl Connect</span>
             </a>
           </li>
         </ul>
@@ -235,11 +227,11 @@ nx affected:test
 
 # run e2e tests for current changes
 nx affected:e2e
-  `}</pre>
+`}</pre>
         </details>
       </main>
     </StyledApp>
   );
 };
 
-export default App;
+export default Index;
