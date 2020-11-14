@@ -1,45 +1,7 @@
-module.exports = {
-  siteMetadata: {
-    title: `booth`,
-    description: `This is a gatsby application created by Nx.`,
-  },
-  plugins: [
-    'gatsby-plugin-styled-components',
+// We register the TypeScript evaluator in gatsby-config so we don't need to do
+// it in any other .js file. It automatically reads TypeScript config from
+// tsconfig.json.
+require('ts-node').register();
 
-    {
-      resolve: 'gatsby-plugin-svgr',
-      options: {
-        svgo: false,
-        ref: true,
-      },
-    },
-    `gatsby-plugin-react-helmet`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
-    `gatsby-transformer-sharp`,
-    {
-      resolve: require.resolve(`@nrwl/gatsby/plugins/nx-gatsby-ext-plugin`),
-      options: {
-        path: __dirname,
-      },
-    },
-    `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `booth`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/logo.png`,
-      },
-    },
-  ],
-};
+// Use a TypeScript version of gatsby-config.js.
+module.exports = require('./gatsby-config.ts');
